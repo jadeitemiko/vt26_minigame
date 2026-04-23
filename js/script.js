@@ -1,23 +1,21 @@
 // TODO minispelet
-// 1. Variabler: Skapa score, timeLeft, isGameActive och API-URL (const).
-// 2. DOM-referenser: Koppla variabler till HTML-element (knapp, poängtext, timer).
-// 3. Start-logik: Funktion för att sätta isGameActive = true och nollställa score.
-// 4. Poäng-logik: Funktion som ökar score vid klick, men BARA om isGameActive är true.
-// 5. Timer-logik: Använd setInterval för att räkna ner. Stoppa vid 0 och sätt isGameActive = false.
-// 6. Namn-input: Hantera hämtning av namn från textfältet (3-16 tecken).
-// 7. Submit-logik: Använd fetch (POST) för att skicka JSON {name, score} till Zapier-URL.
-// 8. Feedback: Visa ett meddelande (alert eller text) om poängen sparades.
+//VG nivå kvar
 
 //API-KONSTANTER
 const POST_URL = "https://hooks.zapier.com/hooks/catch/8338993/ujs9jj9/";
 const GET_URL = "https://script.google.com/macros/s/AKfycbys5aEPMvNCutyhNYYCcQcCjzsi2UtqNspmKyCH-AicJxJbCJMrAoT0LUaYaXhTWA8n/exec";
 
+//TIDSKONSTANT
+//för att kunna korta under test
+const START_TIME = 10;
+
 //STARTVARIABLER
 let score = 0;
-let timeLeft = 10;
+let timeLeft = START_TIME;
 let gameStarted = false;
 let gameEnded = false;
 let timerInterval = null;
+let hasSubmitted = false;
 
 //DOM-ELEMENT
 const scoreDisplay = document.getElementById('score-display');
@@ -82,9 +80,12 @@ const endGame = () => {
 //NOLLSTÄLL Om spelaren vill köra en till omgång
 againBtn.addEventListener('click', () => {
     score = 0;
-    timeLeft = 60;
+    timeLeft = START_TIME;
     gameStarted = false;
     gameEnded = false;
+    submitBtn.disabled = false;
+    submitBtn.innerText = "Submit score";
+    hasSubmitted = false;
 
     scoreDisplay.innerText = score;
     timerDisplay.innerText = timeLeft;
@@ -93,23 +94,31 @@ againBtn.addEventListener('click', () => {
     submitBtn.style.visibility = 'visible';
 });
 
-//HIGH SCORE-LISTA
+//SUBMIT HIGH SCORE
+//skickar resultat till gemensam lista för hela klassen
 const submitHighScore = () => {
-    const name = nameInput.value;
+    //om man försöker skicka samma resultat igen
+    if (hasSubmitted) {
+        alert("You have already sent this score. Play again and you can submit your new result!");
+        return; //
+    }
 
 // Skicka data med fetch
     fetch(POST_URL, {
         method: 'POST',
         body: JSON.stringify({
-            name: name,
+            name: nameInput.value,
             score: score
         })
     })
         .then(() => {
+            hasSubmitted = true; // låser knappen så man inte kan skicka 2 ggr
             alert("Your score has been submitted!");
         })
+
+        //fel? låser inte knappen, så man kan försöka igen
         .catch((error) => {
-            console.error("There was a problem when attempting to submit. Error: ", error);
+            console.error("There was a problem when attempting to submit:", error);
         });
 };
 
