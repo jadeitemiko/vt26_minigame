@@ -6,7 +6,7 @@ const POST_URL = "https://hooks.zapier.com/hooks/catch/8338993/ujs9jj9/";
 const GET_URL = "https://script.google.com/macros/s/AKfycbys5aEPMvNCutyhNYYCcQcCjzsi2UtqNspmKyCH-AicJxJbCJMrAoT0LUaYaXhTWA8n/exec";
 
 //TIDSKONSTANT
-//för att kunna korta under test
+//isolera för att kunna korta under test
 const START_TIME = 10;
 
 //STARTVARIABLER
@@ -31,18 +31,18 @@ const startGame = () => {
     const rawName = nameInput.value.trim();
 
     if (!isNameValid(rawName)) {
-        alert("Oops! Your player name must be 2-16 characters and can contain only letters a-z and numbers.");
+        alert("Oops! Your player name must be 2-16 characters and can contain only letters a-z, numbers and underscore.");
         return;
         }
 
     //räkna även första klicket för poäng
     gameStarted = true;
-    gameEnded = false;
+    gameEndeded = false;
     nameInput.value = rawName.toLowerCase(); //gör om namnet till små bokstäver
 
-//rensa input-fälten under spel
-    nameInput.style.visibility = 'hidden';
-    submitBtn.style.visibility = 'hidden';
+//rensa input-fälten under spel (så man inte ändrar namn) + lås submit-knapp (så man inte skickar halvklart resultat)
+    nameInput.disabled = true;
+    submitBtn.disabled = true;
 
 //tidsräknaren
     timerInterval = setInterval(() => {
@@ -54,6 +54,7 @@ const startGame = () => {
     }, 1000);
 };
 
+//starta spelet + kontroll man inte fortsätter efter tid
 clickBtn.addEventListener('click', () => {
     if (!gameStarted && !gameEnded) {
         startGame();
@@ -71,8 +72,8 @@ const endGame = () => {
     gameEnded = true;
     clearInterval(timerInterval);
 
-    nameInput.style.visibility = 'visible';
-    submitBtn.style.visibility = 'visible';
+    nameInput.disabled = false;
+    submitBtn.disabled = false;
 
     alert("Game finished! Your result: " + score);
 };
@@ -90,8 +91,8 @@ againBtn.addEventListener('click', () => {
     scoreDisplay.innerText = score;
     timerDisplay.innerText = timeLeft;
 
-    nameInput.style.visibility = 'visible';
-    submitBtn.style.visibility = 'visible';
+    nameInput.disabled = false;
+    submitBtn.disabled = false;
 });
 
 //SUBMIT HIGH SCORE

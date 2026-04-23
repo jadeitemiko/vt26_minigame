@@ -1,8 +1,8 @@
 // VALIDERA NAMN
-// För att inte skicka tomma namn till high score lista.
-// Tillåter a-z och 0-9, omfattning 2-16 tecken,
+// För att inte skicka tomma namn eller konstiga tecken till high score lista.
+// Tillåter a-z, 0-9 och _, omfattning 2-16 tecken,
 
 const isNameValid = (name) => {
-    const pattern = /^[a-zA-Z0-9]{2,16}$/;
+        const pattern = /^\w{2,16}$/;
     return pattern.test(name);
 };
