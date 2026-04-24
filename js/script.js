@@ -7,7 +7,7 @@ const GET_URL = "https://script.google.com/macros/s/AKfycbys5aEPMvNCutyhNYYCcQcC
 
 //TIDSKONSTANT
 //isolera för att kunna korta under test
-const START_TIME = 10;
+const START_TIME = 60;
 
 //STARTVARIABLER
 let score = 0;

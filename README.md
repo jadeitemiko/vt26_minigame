@@ -10,3 +10,4 @@ Genomfört för G-nivå
 7. Submit-logik: Använd fetch (POST) för att skicka JSON {name, score} till Zapier-URL.
 8. Feedback: Visa ett meddelande (alert eller text) om poängen sparades.
 9. Buggfixar: Kan ej skicka in utan namn, kan ej skicka in samma resultat flera gånger
+10. skapat css

@@ -2,31 +2,37 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Clicking game 1.0</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Clicking game 1.1</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <h1>The great clicking game</h1>
 <p>How many times can you click the button in one minute?
-    Try and compete against the class</p>
+    Try and compete against the class.</p>
+<div id="gamebox" class="gamebox">
     <div>
         <label for="name-input">Your name here</label>
         <input type="text" id="name-input" name="name" placeholder="Username (2-16 chars)">
-        <button id="click-button">Click me!</button>
+        <p>
+        <button id="click-button" class="click-button">Click me!</button>
+        </p>
     </div>
-    <div>
-        <h2>Your result</h2>
+    <div id="scorebox" class="scorebox">
+        <h2>Score</h2>
         <p>Score: <span id="score-display">0</span></p>
-        <p>Countdown timer: <span id="timer-display">10</span></p>
-        <button id="submit-button">Submit score</button>
+        <p>Countdown timer: <span id="timer-display">60</span></p>
+        <button id="submit-button" class="minor-button">Submit score</button>
     </div>
 <div><h2>Another round?</h2>
-    <button id="again-button">Play again!</button>
+    <button id="again-button" class="minor-button">Play again!</button>
+</div>
 </div>
 <hr>
-<footer>Game created by Gabriella Gomez, Digital Analytics / Medieinstitutet, 2026</footer>
+<footer>
+<div class="footer-text">Content created by G. Gomez, 2026 as part of
+    class project for YH-course "Digital Analytics" at
+    <a href="https://medieinstitutet.se/utbildningar/digital-analytics/" target="_blank">Medieinstitutet</a></div></footer>
 <script src="js/validation.js"></script>
 <script src="js/script.js"></script>
 </body>
