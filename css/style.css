@@ -26,12 +26,25 @@ a:hover {
 
 .gamebox {
     margin: 20px;
-    padding: 20px;
+    padding: 15px;
+}
+
+.scorebox {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border: 4px double maroon;
+    border-radius: 8px;
+    min-width: 200px;
+}
+
+.highscore {
+    text-align: left;
+    display: inline-block;
 }
 
 .click-button {
-    border-width: 6px;
-    border-style: double;
+    border: 6px double maroon;
     border-radius: 30% / 70%;
     padding: 16px;
     margin: 8px;

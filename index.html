@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Clicking game 1.1</title>
+    <title>Clicking game 1.2</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -18,11 +18,17 @@
         <button id="click-button" class="click-button">Click me!</button>
         </p>
     </div>
-    <div id="scorebox" class="scorebox">
-        <h2>Score</h2>
+    <div id="local-scorebox" class="scorebox">
+        <h2>Your score</h2>
         <p>Score: <span id="score-display">0</span></p>
         <p>Countdown timer: <span id="timer-display">##</span></p>
         <button id="submit-button" class="minor-button" disabled>Submit score</button>
+    </div>
+    <div id="global-scorebox" class="scorebox">
+        <h2>High scores</h2>
+        <ol id="highscore-list" class="highscore">
+            <li>Loading scores...</li>
+        </ol>
     </div>
 <div><h2>Another round?</h2>
     <button id="again-button" class="minor-button">Play again!</button>
@@ -34,6 +40,11 @@
     class project for YH-course "Digital Analytics" at
     <a href="https://medieinstitutet.se/utbildningar/digital-analytics/" target="_blank">Medieinstitutet</a></div></footer>
 <script src="js/validation.js"></script>
+<script src="js/highscore-cleaner.js"></script>
 <script src="js/script.js"></script>
+<script>
+    // Immediately start loading highscore list; database often laggy
+    updateScoreboard();
+</script>
 </body>
 </html>
