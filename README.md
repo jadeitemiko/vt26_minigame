@@ -24,3 +24,4 @@ The /docs folder contains examples of error messages and game variations:
 * `invalid_name.png` – Alert if a player attempts to enter unauthorized name (too long etc).
 * `game_breaking_name.png` – Demonstrates what might happen without truncation of  names, now prevented in `highscore-cleaner.js`. Through `validation.js`, stops such names to be submitted from this game.
 * `highscore_could_not_be_refreshed.png` – Shows what happens if a loaded highscore list could not be refreshed. Instead of overwriting, a small error message is appended beneath names. 
+* `played_game_reset.png` - user Supertrooper has played the game and entered highscore list with 344 clicks. Due to time it takes for Zapier/Gdocs to update, it was not visible immediately but when user hit Play again! after a few seconds, the highscore list updated 
