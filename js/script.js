@@ -10,7 +10,7 @@
 const POST_URL = "https://hooks.zapier.com/hooks/catch/8338993/ujs9jj9/";
 const GET_URL = "https://script.google.com/macros/s/AKfycbys5aEPMvNCutyhNYYCcQcCjzsi2UtqNspmKyCH-AicJxJbCJMrAoT0LUaYaXhTWA8n/exec";
 
-const START_TIME = 5; //isolated time to shorten during testruns
+const START_TIME = 60; //isolated time to shorten during testruns
 
 //starting variables
 let score = 0;

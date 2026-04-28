@@ -8,32 +8,30 @@
 </head>
 <body>
 <h1>The great clicking game</h1>
-<p>How many times can you click the button in one minute?
-    Try and compete against the class.</p>
-<div id="gamebox" class="gamebox">
-    <div>
+<p><em>How many times can you click the button in one minute?</em></p>
+<p>Try and compete against the class DAN25S! Once you've played the game, submit your score to our class database and see how you fare against
+    everyone playing a version of our clicking game. Just add your name and then smash that <em>Click me!</em>-button as many times as you can.</p>
+    <div id="gamebox" class="gamebox">
         <label for="name-input">Your name here</label>
         <input type="text" id="name-input" name="name" placeholder="Username (2-16 chars)">
-        <p>
-        <button id="click-button" class="click-button">Click me!</button>
-        </p>
+        <p><button id="click-button" class="click-button">Click me!</button></p>
     </div>
-    <div id="local-scorebox" class="scorebox">
+    <div id="scoring" class="scorebox">
+    <div id="local-scorebox" class="local-scorebox">
         <h2>Your score</h2>
         <p>Score: <span id="score-display">0</span></p>
         <p>Countdown timer: <span id="timer-display">##</span></p>
         <button id="submit-button" class="minor-button" disabled>Submit score</button>
     </div>
-    <div id="global-scorebox" class="scorebox">
+    <div id="global-scorebox" class="global-scorebox">
         <h2>High scores</h2>
         <ol id="highscore-list" class="highscore">
             <li>Loading scores...</li>
         </ol>
     </div>
-<div><h2>Another round?</h2>
+    </div>
+<h2>Another round?</h2>
     <button id="again-button" class="minor-button">Play again!</button>
-</div>
-</div>
 <hr>
 <footer>
 <div class="footer-text">Content created by G. Gomez, 2026 as part of
