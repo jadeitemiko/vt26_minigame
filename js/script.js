@@ -1,5 +1,8 @@
 // TODO minigame
-//VG level left
+//VG tasks:
+//- Create container for highscore
+//- use GET_URL to pull class results
+// - sort and trim class results to only show top scores
 
 //API-CONSTANTS
 const POST_URL = "https://hooks.zapier.com/hooks/catch/8338993/ujs9jj9/";
@@ -7,7 +10,7 @@ const GET_URL = "https://script.google.com/macros/s/AKfycbys5aEPMvNCutyhNYYCcQcC
 
 //TIME CONSTANT
 //isolated so that I can easily shorten during tests
-const START_TIME = 60;
+const START_TIME = 20;
 
 //STARTING VARIABLES
 let score = 0;
@@ -24,6 +27,7 @@ const clickBtn = document.getElementById('click-button');
 const nameInput = document.getElementById('name-input');
 const againBtn = document.getElementById('again-button');
 const submitBtn = document.getElementById('submit-button');
+timerDisplay.innerText = timeLeft; //conntects js-time to html-time
 
 //GAME LOGIC & UI
 //at game start, validate name (logic in separate file)
@@ -40,7 +44,8 @@ const startGame = () => {
     gameEndeded = false;
     nameInput.value = rawName.toLowerCase();
 
-//empty input field during game (so name can't be changed partway) + lock submit button
+//empty input field during game (so name can't be changed partway)
+//lock submit button
     nameInput.disabled = true;
     submitBtn.disabled = true;
 
@@ -72,7 +77,7 @@ const endGame = () => {
     gameEnded = true;
     clearInterval(timerInterval);
 
-    nameInput.disabled = false;
+    nameInput.disabled = true;
     submitBtn.disabled = false;
 
     alert("Game finished! Your result: " + score);
@@ -82,17 +87,16 @@ const endGame = () => {
 againBtn.addEventListener('click', () => {
     score = 0;
     timeLeft = START_TIME;
+    timerDisplay.innerText = timeLeft;
     gameStarted = false;
     gameEnded = false;
-    submitBtn.disabled = false;
-    submitBtn.innerText = "Submit score";
     hasSubmitted = false;
+    nameInput.disabled = false;
 
+//Updates scoring
     scoreDisplay.innerText = score;
     timerDisplay.innerText = timeLeft;
 
-    nameInput.disabled = false;
-    submitBtn.disabled = false;
 });
 
 //SUBMIT HIGH SCORE
@@ -115,6 +119,7 @@ const submitHighScore = () => {
         .then(() => {
             hasSubmitted = true; //locks button when submit works
             alert("Your score has been submitted!");
+            nameInput.disabled = false; //opens name field again
         })
 
         //error code, does not lock button
