@@ -1,15 +1,15 @@
-// TODO minispelet
-//VG nivå kvar
+// TODO minigame
+//VG level left
 
-//API-KONSTANTER
+//API-CONSTANTS
 const POST_URL = "https://hooks.zapier.com/hooks/catch/8338993/ujs9jj9/";
 const GET_URL = "https://script.google.com/macros/s/AKfycbys5aEPMvNCutyhNYYCcQcCjzsi2UtqNspmKyCH-AicJxJbCJMrAoT0LUaYaXhTWA8n/exec";
 
-//TIDSKONSTANT
-//isolera för att kunna korta under test
+//TIME CONSTANT
+//isolated so that I can easily shorten during tests
 const START_TIME = 60;
 
-//STARTVARIABLER
+//STARTING VARIABLES
 let score = 0;
 let timeLeft = START_TIME;
 let gameStarted = false;
@@ -25,8 +25,8 @@ const nameInput = document.getElementById('name-input');
 const againBtn = document.getElementById('again-button');
 const submitBtn = document.getElementById('submit-button');
 
-//SPELLOGIK & UI
-//vid spelstart, validera namn (logik i separat fil)
+//GAME LOGIC & UI
+//at game start, validate name (logic in separate file)
 const startGame = () => {
     const rawName = nameInput.value.trim();
 
@@ -35,16 +35,16 @@ const startGame = () => {
         return;
         }
 
-    //räkna även första klicket för poäng
+    //count first click for points as well
     gameStarted = true;
     gameEndeded = false;
-    nameInput.value = rawName.toLowerCase(); //gör om namnet till små bokstäver
+    nameInput.value = rawName.toLowerCase();
 
-//rensa input-fälten under spel (så man inte ändrar namn) + lås submit-knapp (så man inte skickar halvklart resultat)
+//empty input field during game (so name can't be changed partway) + lock submit button
     nameInput.disabled = true;
     submitBtn.disabled = true;
 
-//tidsräknaren
+//time counter
     timerInterval = setInterval(() => {
         timeLeft--;
         timerDisplay.innerText = timeLeft;
@@ -54,20 +54,20 @@ const startGame = () => {
     }, 1000);
 };
 
-//starta spelet + kontroll man inte fortsätter efter tid
+//start the game + control that can't keep clicking after time has run out
 clickBtn.addEventListener('click', () => {
     if (!gameStarted && !gameEnded) {
         startGame();
     }
 
-//poängräknaren
+//score counter
     if (gameStarted && !gameEnded) {
         score++;
         scoreDisplay.innerText = score;
     }
 });
 
-//Avslutar spelet
+//ends game and enables buttons
 const endGame = () => {
     gameEnded = true;
     clearInterval(timerInterval);
@@ -78,7 +78,7 @@ const endGame = () => {
     alert("Game finished! Your result: " + score);
 };
 
-//NOLLSTÄLL Om spelaren vill köra en till omgång
+//RESET GAME
 againBtn.addEventListener('click', () => {
     score = 0;
     timeLeft = START_TIME;
@@ -96,15 +96,15 @@ againBtn.addEventListener('click', () => {
 });
 
 //SUBMIT HIGH SCORE
-//skickar resultat till gemensam lista för hela klassen
+//sends result to class scoreboard
 const submitHighScore = () => {
-    //om man försöker skicka samma resultat igen
+    //not allowed to send same result twice
     if (hasSubmitted) {
         alert("You have already sent this score. Play again and you can submit your new result!");
         return; //
     }
 
-// Skicka data med fetch
+//send data with fetch
     fetch(POST_URL, {
         method: 'POST',
         body: JSON.stringify({
@@ -113,11 +113,11 @@ const submitHighScore = () => {
         })
     })
         .then(() => {
-            hasSubmitted = true; // låser knappen så man inte kan skicka 2 ggr
+            hasSubmitted = true; //locks button when submit works
             alert("Your score has been submitted!");
         })
 
-        //fel? låser inte knappen, så man kan försöka igen
+        //error code, does not lock button
         .catch((error) => {
             console.error("There was a problem when attempting to submit:", error);
         });
